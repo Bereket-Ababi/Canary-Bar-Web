@@ -21,3 +21,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+cookies.txt
+server/data/admin.json
+public/uploads/*
+!public/uploads/.gitkeep

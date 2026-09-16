@@ -8,7 +8,6 @@ export type MenuItem = {
   show_hover_image: boolean;
   is_available: boolean;
   sort_order: number;
-  user_id: string | null;
 };
 
 export type RestaurantInfo = {

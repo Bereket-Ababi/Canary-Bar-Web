@@ -9,28 +9,28 @@ import {
   Phone,
   X,
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { api } from '@/lib/api';
 import { useReveal } from '@/lib/useReveal';
 import type { MenuItem, RestaurantInfo, SessionUser } from '@/lib/types';
 import { AdminPanel } from '@/components/AdminPanel';
 
 const fallbackMenu: MenuItem[] = [
-  { id: '1', name: 'Fiyel Kurt', description: 'Tender beef cubes, bright peppers, and house spices served with warm injera.', category: 'Canary signatures', price: 480, image_url: '/images/Screenshot_2026-09-14_195113.png', show_hover_image: true, is_available: true, sort_order: 1, user_id: null },
-  { id: '2', name: 'Fish Tibs', description: 'Sizzling pan-seared fish with rosemary, lemon, and a little Canary heat.', category: 'Canary signatures', price: 560, image_url: '/images/Screenshot_2026-09-14_195101.png', show_hover_image: true, is_available: true, sort_order: 2, user_id: null },
-  { id: '3', name: 'Doro Wot', description: 'Slow-cooked chicken and hard-boiled egg in a deep berbere sauce, served on injera.', category: 'Canary signatures', price: 650, image_url: '/images/Screenshot_2026-09-14_195054.png', show_hover_image: true, is_available: true, sort_order: 3, user_id: null },
-  { id: '4', name: 'Kitfo Special', description: 'Hand-minched lean beef warmed in niter kibbeh and mitmita, plated with kibe and gomen.', category: 'Canary signatures', price: 720, image_url: '/images/Screenshot_2026-09-14_195040.png', show_hover_image: true, is_available: true, sort_order: 4, user_id: null },
-  { id: '5', name: 'Aasa Lebleb', description: 'Crisp, golden fish bites with fresh herbs and a cool house dip.', category: 'From the kitchen', price: 420, image_url: null, show_hover_image: false, is_available: true, sort_order: 5, user_id: null },
-  { id: '6', name: 'Aasa Tibit', description: 'Ethiopian-style fish sauté with onions, peppers, and fragrant butter.', category: 'From the kitchen', price: 520, image_url: null, show_hover_image: false, is_available: true, sort_order: 6, user_id: null },
-  { id: '7', name: 'Beyaynetu', description: 'A colorful fasting platter: shiro, misir wot, atakilt, and split lentils over injera.', category: 'From the kitchen', price: 540, image_url: '/images/Screenshot_2026-09-14_195019.png', show_hover_image: true, is_available: true, sort_order: 7, user_id: null },
-  { id: '8', name: 'Gored Gored', description: 'Cubed raw beef tossed in warm spiced butter and awaze, for the adventurous table.', category: 'From the kitchen', price: 680, image_url: null, show_hover_image: false, is_available: true, sort_order: 8, user_id: null },
-  { id: '9', name: 'Shiro Wot', description: 'Velvety chickpea flour stew slow-simmered with garlic, onion, and berbere.', category: 'From the kitchen', price: 380, image_url: null, show_hover_image: false, is_available: true, sort_order: 9, user_id: null },
-  { id: '10', name: 'Enkulal Firfir', description: 'Scrambled eggs with onions, tomato, and green chili, folded with fresh kita.', category: 'From the kitchen', price: 290, image_url: null, show_hover_image: false, is_available: true, sort_order: 10, user_id: null },
-  { id: '11', name: 'Avocado Salad', description: 'Ripe avocado, tomato, onion, and jalapeno with lime and a pinch of mitmita.', category: 'From the kitchen', price: 250, image_url: null, show_hover_image: false, is_available: true, sort_order: 11, user_id: null },
-  { id: '12', name: 'St. George Draft', description: 'A bright, crisp Ethiopian lager poured cold from the tap.', category: 'At the bar', price: 180, image_url: null, show_hover_image: false, is_available: true, sort_order: 12, user_id: null },
-  { id: '13', name: 'Canary Old Fashioned', description: 'A slow-sipping pour with orange, bitters, and a warm finish.', category: 'At the bar', price: 420, image_url: null, show_hover_image: false, is_available: true, sort_order: 13, user_id: null },
-  { id: '14', name: 'Tej (Honey Wine)', description: 'House-brewed Ethiopian honey wine, served in a traditional berele flask.', category: 'At the bar', price: 220, image_url: null, show_hover_image: false, is_available: true, sort_order: 14, user_id: null },
-  { id: '15', name: 'Buna (Ethiopian Coffee)', description: 'Freshly roasted and brewed in a jebena, served with popcorn and incense.', category: 'At the bar', price: 120, image_url: null, show_hover_image: false, is_available: true, sort_order: 15, user_id: null },
-  { id: '16', name: 'Canary Spritz', description: 'A bright, bubbly pour with a hint of citrus and a pomegranate finish.', category: 'At the bar', price: 380, image_url: null, show_hover_image: false, is_available: true, sort_order: 16, user_id: null },
+  { id: '1', name: 'Fiyel Kurt', description: 'Tender beef cubes, bright peppers, and house spices served with warm injera.', category: 'Canary signatures', price: 480, image_url: '/images/Screenshot_2026-09-14_195113.png', show_hover_image: true, is_available: true, sort_order: 1 },
+  { id: '2', name: 'Fish Tibs', description: 'Sizzling pan-seared fish with rosemary, lemon, and a little Canary heat.', category: 'Canary signatures', price: 560, image_url: '/images/Screenshot_2026-09-14_195101.png', show_hover_image: true, is_available: true, sort_order: 2 },
+  { id: '3', name: 'Doro Wot', description: 'Slow-cooked chicken and hard-boiled egg in a deep berbere sauce, served on injera.', category: 'Canary signatures', price: 650, image_url: '/images/Screenshot_2026-09-14_195054.png', show_hover_image: true, is_available: true, sort_order: 3 },
+  { id: '4', name: 'Kitfo Special', description: 'Hand-minched lean beef warmed in niter kibbeh and mitmita, plated with kibe and gomen.', category: 'Canary signatures', price: 720, image_url: '/images/Screenshot_2026-09-14_195040.png', show_hover_image: true, is_available: true, sort_order: 4 },
+  { id: '5', name: 'Aasa Lebleb', description: 'Crisp, golden fish bites with fresh herbs and a cool house dip.', category: 'From the kitchen', price: 420, image_url: null, show_hover_image: false, is_available: true, sort_order: 5 },
+  { id: '6', name: 'Aasa Tibit', description: 'Ethiopian-style fish sauté with onions, peppers, and fragrant butter.', category: 'From the kitchen', price: 520, image_url: null, show_hover_image: false, is_available: true, sort_order: 6 },
+  { id: '7', name: 'Beyaynetu', description: 'A colorful fasting platter: shiro, misir wot, atakilt, and split lentils over injera.', category: 'From the kitchen', price: 540, image_url: '/images/Screenshot_2026-09-14_195019.png', show_hover_image: true, is_available: true, sort_order: 7 },
+  { id: '8', name: 'Gored Gored', description: 'Cubed raw beef tossed in warm spiced butter and awaze, for the adventurous table.', category: 'From the kitchen', price: 680, image_url: null, show_hover_image: false, is_available: true, sort_order: 8 },
+  { id: '9', name: 'Shiro Wot', description: 'Velvety chickpea flour stew slow-simmered with garlic, onion, and berbere.', category: 'From the kitchen', price: 380, image_url: null, show_hover_image: false, is_available: true, sort_order: 9 },
+  { id: '10', name: 'Enkulal Firfir', description: 'Scrambled eggs with onions, tomato, and green chili, folded with fresh kita.', category: 'From the kitchen', price: 290, image_url: null, show_hover_image: false, is_available: true, sort_order: 10 },
+  { id: '11', name: 'Avocado Salad', description: 'Ripe avocado, tomato, onion, and jalapeno with lime and a pinch of mitmita.', category: 'From the kitchen', price: 250, image_url: null, show_hover_image: false, is_available: true, sort_order: 11 },
+  { id: '12', name: 'St. George Draft', description: 'A bright, crisp Ethiopian lager poured cold from the tap.', category: 'At the bar', price: 180, image_url: null, show_hover_image: false, is_available: true, sort_order: 12 },
+  { id: '13', name: 'Canary Old Fashioned', description: 'A slow-sipping pour with orange, bitters, and a warm finish.', category: 'At the bar', price: 420, image_url: null, show_hover_image: false, is_available: true, sort_order: 13 },
+  { id: '14', name: 'Tej (Honey Wine)', description: 'House-brewed Ethiopian honey wine, served in a traditional berele flask.', category: 'At the bar', price: 220, image_url: null, show_hover_image: false, is_available: true, sort_order: 14 },
+  { id: '15', name: 'Buna (Ethiopian Coffee)', description: 'Freshly roasted and brewed in a jebena, served with popcorn and incense.', category: 'At the bar', price: 120, image_url: null, show_hover_image: false, is_available: true, sort_order: 15 },
+  { id: '16', name: 'Canary Spritz', description: 'A bright, bubbly pour with a hint of citrus and a pomegranate finish.', category: 'At the bar', price: 380, image_url: null, show_hover_image: false, is_available: true, sort_order: 16 },
 ];
 
 const fallbackInfo: RestaurantInfo = {
@@ -75,20 +75,28 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [user, setUser] = useState<SessionUser | null>(null);
-  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [loadingMenu, setLoadingMenu] = useState(true);
   const [scrolled, setScrolled] = useState(false);
 
   const loadMenu = async () => {
-    const { data } = await supabase.from('menu_items').select('*').order('sort_order', { ascending: true });
-    if (data?.length) setMenuItems(data as MenuItem[]);
-    setLoadingMenu(false);
+    try {
+      const data = await api.getMenu();
+      if (data?.length) setMenuItems(data);
+    } catch {
+      // Keep fallback menu if the local API is offline.
+    } finally {
+      setLoadingMenu(false);
+    }
   };
 
   const loadInfo = async () => {
-    const { data } = await supabase.from('restaurant_info').select('*').eq('id', 1).maybeSingle();
-    if (data) setRestaurantInfo(data as RestaurantInfo);
+    try {
+      const data = await api.getRestaurant();
+      if (data) setRestaurantInfo(data);
+    } catch {
+      // Keep fallback restaurant info if the local API is offline.
+    }
   };
 
   useEffect(() => {
@@ -100,14 +108,7 @@ function App() {
   useEffect(() => {
     void loadMenu();
     void loadInfo();
-
-    void supabase.auth.getSession().then(({ data }) => {
-      if (data.session?.user) setUser({ id: data.session.user.id, email: data.session.user.email });
-    });
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ? { id: session.user.id, email: session.user.email } : null);
-    });
-    return () => listener.subscription.unsubscribe();
+    void api.getMe().then(({ user: current }) => setUser(current)).catch(() => setUser(null));
   }, []);
 
   const categories = useMemo(() => ['All', ...Array.from(new Set(menuItems.map((item) => item.category)))], [menuItems]);
@@ -238,9 +239,9 @@ function App() {
       {isAdminOpen && (
         <AdminPanel
           user={user}
-          authMode={authMode}
-          setAuthMode={setAuthMode}
           onClose={() => setIsAdminOpen(false)}
+          onLogin={setUser}
+          onLogout={() => setUser(null)}
           menuItems={menuItems}
           setMenuItems={setMenuItems}
           restaurantInfo={restaurantInfo}
