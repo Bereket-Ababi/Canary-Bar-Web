@@ -26,6 +26,6 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
 
-  base: '/Canary-Bar-Web2/',
+  base: '/Canary-Bar-Web/',
 
 });

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Bereket-Ababi.github.io/Canary-Bar-Web2",
+  "homepage": "https://Bereket-Ababi.github.io/Canary-Bar-Web",
   "scripts": {
     "dev": "concurrently -n api,web -c yellow,cyan \"npm run server\" \"vite\"",
     "server": "node server/index.js",
