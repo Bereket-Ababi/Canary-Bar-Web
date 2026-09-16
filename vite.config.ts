@@ -25,4 +25,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+
+  base: '/Canary-Bar-Web2/',
+
 });
