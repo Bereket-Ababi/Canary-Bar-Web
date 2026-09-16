@@ -43,12 +43,14 @@ const fallbackInfo: RestaurantInfo = {
   phone_label: 'Call for reservations',
 };
 
+const base = import.meta.env.BASE_URL;
+
 const photos = [
-  '/images/Screenshot_2026-09-14_195123.png',
-  '/images/Screenshot_2026-09-14_195129.png',
-  '/images/Screenshot_2026-09-14_195136.png',
-  '/images/Screenshot_2026-09-14_195142.png',
-  '/images/Screenshot_2026-09-14_195150.png',
+  `${base}images/Screenshot_2026-09-14_195123.png`,
+  `${base}images/Screenshot_2026-09-14_195129.png`,
+  `${base}images/Screenshot_2026-09-14_195136.png`,
+  `${base}images/Screenshot_2026-09-14_195142.png`,
+  `${base}images/Screenshot_2026-09-14_195150.png`,
 ];
 
 const money = (value: number) => `${new Intl.NumberFormat('en-US').format(value)} ETB`;
